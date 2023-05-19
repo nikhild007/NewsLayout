@@ -1,0 +1,29 @@
+.newsCardContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.newsHeading {
+  max-width: 400px;
+  white-space: pre-wrap;
+  word-break: keep-all;
+}
+
+.newsCard {
+  padding: 10px;
+}
+
+.linkElement {
+  color: rgb(56, 56, 56);
+  text-decoration: none;
+}
+
+.linkElement:hover {
+  color: rgb(56, 56, 56);
+  text-decoration: underline;
+}
+
+.linkElement:visited {
+  color: rgb(4, 4, 135);
+}

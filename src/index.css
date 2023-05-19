@@ -1,0 +1,23 @@
+body {
+  font-family: sans-serif;
+}
+
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  max-width: 50%;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@media screen and (max-width: 571px) {
+  .container {
+    max-width: 100%;
+  }
+}

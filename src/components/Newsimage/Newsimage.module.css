@@ -1,0 +1,6 @@
+.newsImage {
+  width: 150px;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 15px;
+}
