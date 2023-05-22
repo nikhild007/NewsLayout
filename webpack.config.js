@@ -43,7 +43,9 @@ module.exports = (_, argv) => ({
     new ModuleFederationPlugin({
       name: "news_layout",
       filename: "remoteEntry.js",
-      remotes: {},
+      remotes: {
+        news_layout: "news_layout@http://localhost:8081/remoteEntry.js",
+      },
       exposes: {
         "./NewsLayout": "./src/App.jsx",
         "./PubSub": "./src/events/globalEvent.jsx",

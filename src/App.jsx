@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import Newscard from "./components/Newscard/Newscard";
 import NewsContentHeader from "./components/NewsContentHeader/NewsContentHeader";
-import { WindowEventService } from "./events/globalEvent";
+import { WindowEventService } from "news_layout/PubSub";
 
 import "./index.css";
 
