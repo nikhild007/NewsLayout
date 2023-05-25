@@ -3,8 +3,10 @@ import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import Newscard from "./components/Newscard/Newscard";
 import NewsContentHeader from "./components/NewsContentHeader/NewsContentHeader";
-import { WindowEventService } from "news_layout/PubSub";
+import WindowEventService from "./events/globalEvent";
 import InfiniteScroll from "react-infinite-scroll-component";
+import Toolbar from "@mui/material/Toolbar";
+import Box from "@mui/material/Box";
 
 import "./index.css";
 
@@ -134,7 +136,17 @@ const App = () => {
   }, []);
 
   return (
-    <div className="container">
+    <Box
+      sx={{
+        maxWidth: "50%",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        marginTop: "2rem",
+        marginLeft: "2rem",
+      }}
+    >
+      <Toolbar />
       <NewsContentHeader />
       <InfiniteScroll
         dataLength={newsData.length}
@@ -168,7 +180,7 @@ const App = () => {
           />
         ))}
       </InfiniteScroll>
-    </div>
+    </Box>
   );
 };
 export default App;

@@ -1,4 +1,4 @@
-export const WindowEventService = {
+const WindowEventService = {
   fire: (event, body) => {
     const customEvent = new CustomEvent(event, body);
 
@@ -11,3 +11,5 @@ export const WindowEventService = {
     window.removeEventListener(event, listener);
   },
 };
+
+export default WindowEventService;
