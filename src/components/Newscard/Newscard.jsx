@@ -1,4 +1,4 @@
-import { Link, Typography } from "@mui/material";
+import { Chip, Link, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { WindowEventService } from "news_layout/PubSub";
 import AgencyDetails from "../AgencyDetails/AgencyDetails";
@@ -6,7 +6,15 @@ import Newsimage from "../Newsimage/Newsimage";
 import PublishDateFormatter from "../PublishDateFormatter/PublishDateFormatter";
 import styles from "./Newscard.module.css";
 
-function Newscard({ agencyImage, imageUrl, publishDate, url, title }) {
+function Newscard({
+  agencyImage,
+  imageUrl,
+  publishDate,
+  url,
+  title,
+  showCategory,
+  category,
+}) {
   const newsClickHandler = (news_id) => {
     WindowEventService.fire("clickedNews", { details: news_id });
   };
@@ -19,7 +27,7 @@ function Newscard({ agencyImage, imageUrl, publishDate, url, title }) {
         onClick={newsClickHandler(1)}
       >
         <div className={styles.newsCard}>
-          <AgencyDetails agencyImage={agencyImage} />
+          <AgencyDetails agencyImage={agencyImage} newsUrl={url} />
           <div className={styles.newsCardContent}>
             <div>
               <Typography
@@ -29,7 +37,10 @@ function Newscard({ agencyImage, imageUrl, publishDate, url, title }) {
               >
                 {title}
               </Typography>
-              <PublishDateFormatter publishDate={publishDate} />
+              <div className={styles.dateAndCategory}>
+                <PublishDateFormatter publishDate={publishDate} />
+                {showCategory && <Chip label={category} />}
+              </div>
             </div>
             <Newsimage imageUrl={imageUrl} />
           </div>

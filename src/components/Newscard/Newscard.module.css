@@ -22,8 +22,15 @@
 .linkElement:hover {
   color: rgb(56, 56, 56);
   text-decoration: underline;
+  cursor: pointer;
 }
 
 .linkElement:visited {
   color: rgb(4, 4, 135);
+}
+
+.dateAndCategory {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
