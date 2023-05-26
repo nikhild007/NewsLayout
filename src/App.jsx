@@ -86,6 +86,12 @@ const App = () => {
   };
 
   const fetchMoreData = async () => {
+    //check for response
+    // const feedsfromEach = 20 / filter.length;
+    // if (feedsfromEach * filter.length > response.data) {
+    //   setHasMore(false);
+    // }
+
     if (page === 4) {
       setHasMore(false);
       return;
@@ -109,7 +115,11 @@ const App = () => {
   };
 
   useEffect(() => {
+    // make page start to 1
+    setPage(1);
+
     //fetch news by default or by preference
+
     setNewsData([
       ...newsData,
       {
