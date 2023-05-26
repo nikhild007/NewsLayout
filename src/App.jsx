@@ -5,8 +5,8 @@ import Newscard from "./components/Newscard/Newscard";
 import NewsContentHeader from "./components/NewsContentHeader/NewsContentHeader";
 import WindowEventService from "./events/globalEvent";
 import InfiniteScroll from "react-infinite-scroll-component";
-import Toolbar from "@mui/material/Toolbar";
 import Box from "@mui/material/Box";
+import socketIOClient from "socket.io-client";
 
 import "./index.css";
 import { imageMapping } from "./utils/imageMapping";
@@ -91,6 +91,10 @@ const App = () => {
   }, [filter]);
 
   useEffect(() => {
+    const socket = socketIOClient("https://3621-45-121-2-206.ngrok-free.app");
+
+    socket.on("HII", (res) => console.log(res));
+
     WindowEventService.subscribe("agency-category-filter", filterHandler);
     WindowEventService.subscribe("updateFeed", updateFeedHandler);
     WindowEventService.subscribe("isAuthenticated", handleAuthentication);
