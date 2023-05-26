@@ -1,4 +1,4 @@
-import { CircularProgress } from "@mui/material";
+import { CircularProgress, useTheme } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import Newscard from "./components/Newscard/Newscard";
@@ -9,63 +9,15 @@ import Toolbar from "@mui/material/Toolbar";
 import Box from "@mui/material/Box";
 
 import "./index.css";
+import { imageMapping } from "./utils/imageMapping";
 
 const App = () => {
-  const [filter, setFilter] = useState([1, 2]);
-  const [newsData, setNewsData] = useState([
-    {
-      image: "https://static.toiimg.com/photo/msid-100294611,imgsize-23816.cms",
-      agencyImage: "https://timesofindia.indiatimes.com/photo/507610.cms",
-      title: "We lost our way in second half of the innings: Rohit Sharma",
-      publishDate: "2023-05-17T11:12:50+05:30",
-      url: "https://www.google.com",
-    },
-    {
-      image: "https://static.toiimg.com/photo/msid-100294611,imgsize-23816.cms",
-      agencyImage: "https://timesofindia.indiatimes.com/photo/507610.cms",
-      title: "We lost our way in second half of the innings: Rohit Sharma",
-      publishDate: "2023-05-17T11:12:50+05:30",
-      url: "https://www.google.com",
-    },
-    {
-      image: "https://static.toiimg.com/photo/msid-100294611,imgsize-23816.cms",
-      agencyImage: "https://timesofindia.indiatimes.com/photo/507610.cms",
-      title: "We lost our way in second half of the innings: Rohit Sharma",
-      publishDate: "2023-05-17T11:12:50+05:30",
-      url: "https://www.google.com",
-    },
-    {
-      image: "https://static.toiimg.com/photo/msid-100294611,imgsize-23816.cms",
-      agencyImage: "https://timesofindia.indiatimes.com/photo/507610.cms",
-      title: "We lost our way in second half of the innings: Rohit Sharma",
-      publishDate: "2023-05-17T11:12:50+05:30",
-      url: "https://www.google.com",
-    },
-    {
-      image: "https://static.toiimg.com/photo/msid-100294611,imgsize-23816.cms",
-      agencyImage: "https://timesofindia.indiatimes.com/photo/507610.cms",
-      title: "We lost our way in second half of the innings: Rohit Sharma",
-      publishDate: "2023-05-17T11:12:50+05:30",
-      url: "https://www.google.com",
-    },
-    {
-      image: "https://static.toiimg.com/photo/msid-100294611,imgsize-23816.cms",
-      agencyImage: "https://timesofindia.indiatimes.com/photo/507610.cms",
-      title: "We lost our way in second half of the innings: Rohit Sharma",
-      publishDate: "2023-05-17T11:12:50+05:30",
-      url: "https://www.google.com",
-    },
-    {
-      image: "https://static.toiimg.com/photo/msid-100294611,imgsize-23816.cms",
-      agencyImage: "https://timesofindia.indiatimes.com/photo/507610.cms",
-      title: "We lost our way in second half of the innings: Rohit Sharma",
-      publishDate: "2023-05-17T11:12:50+05:30",
-      url: "https://www.google.com",
-    },
-  ]);
+  const [filter, setFilter] = useState([]);
+  const [newsData, setNewsData] = useState([]);
   const [loader, setLoader] = useState(false);
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(1);
+  const theme = useTheme();
 
   const filterHandler = (event) => {
     setFilter(event);
@@ -86,51 +38,56 @@ const App = () => {
   };
 
   const fetchMoreData = async () => {
-    //check for response
-    // const feedsfromEach = 20 / filter.length;
-    // if (feedsfromEach * filter.length > response.data) {
-    //   setHasMore(false);
-    // }
-
-    if (page === 4) {
-      setHasMore(false);
-      return;
-    }
     console.log("Fetch More", page + 1);
     setPage(page + 1);
-    setTimeout(() => {
-      setNewsData((prevData) => [
-        ...prevData,
-
-        {
-          image:
-            "https://static.toiimg.com/photo/msid-100294611,imgsize-23816.cms",
-          agencyImage: "https://timesofindia.indiatimes.com/photo/507610.cms",
-          title: "We lost our way in second half of the innings: Rohit Sharma",
-          publishDate: "2023-05-17T11:12:50+05:30",
-          url: "https://www.google.com",
-        },
-      ]);
-    }, 1500);
+    fetch(`https://3621-45-121-2-206.ngrok-free.app/api/v1/news-feed`, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        filter,
+        page,
+      }),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        if (result.data.length === 0) {
+          setHasMore(false);
+        } else {
+          setNewsData([...newsData, ...result.data]);
+        }
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
   };
 
   useEffect(() => {
     // make page start to 1
     setPage(1);
+    setLoader(true);
 
     //fetch news by default or by preference
-
-    setNewsData([
-      ...newsData,
-      {
-        image:
-          "https://static.toiimg.com/photo/msid-100294611,imgsize-23816.cms",
-        agencyImage: "https://timesofindia.indiatimes.com/photo/507610.cms",
-        title: "We lost our way in second half of the innings: Rohit Sharma",
-        publishDate: "2023-05-17T11:12:50+05:30",
-        url: "https://www.google.com",
+    fetch(`https://3621-45-121-2-206.ngrok-free.app/api/v1/news-feed`, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
       },
-    ]);
+      body: JSON.stringify({
+        filter,
+        page,
+      }),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        setLoader(false);
+        setNewsData(result.data);
+        // console.log(result);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
   }, [filter]);
 
   useEffect(() => {
@@ -154,9 +111,11 @@ const App = () => {
         justifyContent: "center",
         marginTop: "2rem",
         marginLeft: "2rem",
+        [theme.breakpoints.down(630)]: {
+          maxWidth: "100%",
+        },
       }}
     >
-      <Toolbar />
       <NewsContentHeader />
       <InfiniteScroll
         dataLength={newsData.length}
@@ -180,13 +139,16 @@ const App = () => {
         )}
         {newsData?.map((item) => (
           <Newscard
+            key={item._id}
             showCategory={filter.length > 1 ? true : false}
-            imageUrl={item.image}
+            imageUrl={item.image ? item.image : imageMapping["none"]}
             title={item.title}
-            publishDate={item.publishDate}
+            publishDate={item.publishedAt}
             url={item.url}
-            agencyImage={item.agencyImage}
+            agencyImage={item.agencyId.logo}
             category="Sports"
+            news_id={item._id}
+            clickCount={item.clickCount}
           />
         ))}
       </InfiniteScroll>

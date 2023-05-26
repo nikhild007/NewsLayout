@@ -14,6 +14,7 @@ function Newscard({
   title,
   showCategory,
   category,
+  news_id,
 }) {
   const newsClickHandler = (news_id) => {
     WindowEventService.fire("clickedNews", { details: news_id });
@@ -24,7 +25,7 @@ function Newscard({
       <a
         href={url}
         className={styles.linkElement}
-        onClick={newsClickHandler(1)}
+        onClick={newsClickHandler(news_id)}
       >
         <div className={styles.newsCard}>
           <AgencyDetails agencyImage={agencyImage} newsUrl={url} />

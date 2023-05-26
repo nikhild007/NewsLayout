@@ -1,6 +1,7 @@
 .newsImage {
   width: 150px;
-  object-fit: contain;
+  object-fit: cover;
   object-position: center;
   border-radius: 15px;
+  height: 100px;
 }
