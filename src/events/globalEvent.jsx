@@ -1,7 +1,6 @@
 const WindowEventService = {
   fire: (event, body) => {
-    const customEvent = new CustomEvent(event, body);
-
+    const customEvent = new CustomEvent(event, { detail: body });
     window.dispatchEvent(customEvent);
   },
   subscribe: (event, listener) => {
