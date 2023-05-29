@@ -21,7 +21,3 @@ body {
     max-width: 100%;
   }
 }
-
-.infinityScroll {
-  height: calc(100vh - 150px) !important;
-}

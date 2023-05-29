@@ -114,12 +114,12 @@ const App = () => {
   return (
     <Box
       sx={{
-        maxWidth: "50%",
+        width: "100%",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
-        marginTop: "2rem",
-        marginLeft: "2rem",
+        marginTop: "6rem",
+        marginLeft: "4rem",
         [theme.breakpoints.down(630)]: {
           maxWidth: "100%",
         },
