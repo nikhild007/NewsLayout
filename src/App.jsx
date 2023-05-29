@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import Newscard from "./components/Newscard/Newscard";
 import NewsContentHeader from "./components/NewsContentHeader/NewsContentHeader";
-import WindowEventService from "./events/globalEvent";
+import WindowEventService from "news_app/PubSub";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Box from "@mui/material/Box";
 import socketIOClient from "socket.io-client";
@@ -40,7 +40,6 @@ const App = () => {
   };
 
   const fetchMoreData = async () => {
-    console.log("Fetch More", page + 1);
     setPage(page + 1);
     fetch(`https://3621-45-121-2-206.ngrok-free.app/api/v1/news-feed`, {
       method: "post",
