@@ -1,4 +1,5 @@
 import { CircularProgress, useTheme } from "@mui/material";
+import addNotification from "react-push-notification";
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import Newscard from "./components/Newscard/Newscard";
@@ -92,6 +93,10 @@ const App = () => {
 
   useEffect(() => {
     const socket = socketIOClient("https://3621-45-121-2-206.ngrok-free.app");
+    addNotification({
+      title: "Warning",
+      native: true,
+    });
 
     socket.on("HII", (res) => console.log(res));
 
@@ -122,6 +127,7 @@ const App = () => {
     >
       <NewsContentHeader />
       <InfiniteScroll
+        className="infinityScroll"
         dataLength={newsData.length}
         next={fetchMoreData}
         hasMore={hasMore}
