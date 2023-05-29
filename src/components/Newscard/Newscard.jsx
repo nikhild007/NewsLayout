@@ -1,5 +1,5 @@
-import { Chip, Link, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { Chip, Typography } from "@mui/material";
+import React from "react";
 import WindowEventService from "news_app/PubSub";
 import AgencyDetails from "../AgencyDetails/AgencyDetails";
 import Newsimage from "../Newsimage/Newsimage";
