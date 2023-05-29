@@ -22,6 +22,7 @@ const App = () => {
 
   const filterHandler = (event) => {
     setFilter(event);
+    setLoader(true);
   };
 
   const updateFeedHandler = (event) => {
@@ -114,14 +115,14 @@ const App = () => {
   return (
     <Box
       sx={{
-        width: "100%",
+        width: "60%",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
         marginTop: "6rem",
         marginLeft: "4rem",
         [theme.breakpoints.down(630)]: {
-          maxWidth: "100%",
+          width: "100%",
         },
       }}
     >
@@ -156,7 +157,7 @@ const App = () => {
             publishDate={item.publishedAt}
             url={item.url}
             agencyImage={item.agencyId.logo}
-            category="Sports"
+            category={item.categoryId.title}
             news_id={item._id}
             clickCount={item.clickCount}
           />
