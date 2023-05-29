@@ -17,7 +17,7 @@ function Newscard({
   news_id,
 }) {
   const newsClickHandler = (news_id) => {
-    WindowEventService.fire("clickedNews", { details: news_id });
+    WindowEventService.fire("clickedNews", { news_id });
   };
 
   return (
