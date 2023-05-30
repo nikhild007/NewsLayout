@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import Newscard from "./components/Newscard/Newscard";
 import NewsContentHeader from "./components/NewsContentHeader/NewsContentHeader";
-import WindowEventService from "news_layout/PubSub";
+import WindowEventService from "news_app/PubSub";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Box from "@mui/material/Box";
 import socketIOClient from "socket.io-client";
@@ -155,7 +155,7 @@ const App = () => {
           {newsData?.map((item, index) => (
             <Newscard
               key={index}
-              showCategory={filter.length > 1 ? true : false}
+              showCategory={true}
               imageUrl={item.image ? item.image : imageMapping["none"]}
               title={item.title}
               publishDate={item.publishedAt}

@@ -1,6 +1,6 @@
 import { Chip, Typography } from "@mui/material";
 import React from "react";
-import WindowEventService from "news_layout/PubSub";
+import WindowEventService from "news_app/PubSub";
 import AgencyDetails from "../AgencyDetails/AgencyDetails";
 import Newsimage from "../Newsimage/Newsimage";
 import PublishDateFormatter from "../PublishDateFormatter/PublishDateFormatter";
