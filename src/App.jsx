@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import Newscard from "./components/Newscard/Newscard";
 import NewsContentHeader from "./components/NewsContentHeader/NewsContentHeader";
-import WindowEventService from "./events/globalEvents";
+import WindowEventService from "news_layout/PubSub";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Box from "@mui/material/Box";
 import socketIOClient from "socket.io-client";
@@ -42,7 +42,7 @@ const App = () => {
 
   const fetchMoreData = async () => {
     setPage(page + 1);
-    fetch(`https://f81e-45-121-2-247.ngrok-free.app/api/v1/news-feed`, {
+    fetch(`https://bee8-45-121-2-247.ngrok-free.app/api/v1/news-feed`, {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -71,7 +71,7 @@ const App = () => {
     setLoader(true);
 
     //fetch news by default or by preference
-    fetch(`https://f81e-45-121-2-247.ngrok-free.app/api/v1/news-feed`, {
+    fetch(`https://bee8-45-121-2-247.ngrok-free.app/api/v1/news-feed`, {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -84,8 +84,8 @@ const App = () => {
       .then((res) => res.json())
       .then((result) => {
         setLoader(false);
+        console.log(result.data[0].agencyId);
         setNewsData(result.data);
-        // console.log(result);
       })
       .catch((err) => {
         console.log(err.message);
@@ -93,7 +93,7 @@ const App = () => {
   }, [filter]);
 
   useEffect(() => {
-    const socket = socketIOClient("https://3621-45-121-2-206.ngrok-free.app");
+    // const socket = socketIOClient("https://3621-45-121-2-206.ngrok-free.app");
     addNotification({
       title: "News Update",
       subtitle: "News Info",
@@ -101,7 +101,7 @@ const App = () => {
       native: true,
     });
 
-    socket.on("news_updated", (data) => console.log(data));
+    // socket.on("news_updated", (data) => console.log(data));
 
     WindowEventService.subscribe("agency-category-filter", filterHandler);
     WindowEventService.subscribe("updateFeed", updateFeedHandler);
@@ -160,7 +160,7 @@ const App = () => {
               title={item.title}
               publishDate={item.publishedAt}
               url={item.url}
-              agencyImage={item.agencyId.logo}
+              agencyImage={item?.agencyId?.logo}
               category={item.categoryId.title}
               news_id={item._id}
               clickCount={item.clickCount}
