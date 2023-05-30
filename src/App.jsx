@@ -101,7 +101,7 @@ const App = () => {
     //   native: true,
     // });
 
-    socket.on("HII", (res) => console.log(res));
+    socket.on("news_updated", (data) => console.log(data));
 
     WindowEventService.subscribe("agency-category-filter", filterHandler);
     WindowEventService.subscribe("updateFeed", updateFeedHandler);
