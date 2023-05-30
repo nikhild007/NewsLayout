@@ -48,7 +48,6 @@ module.exports = (_, argv) => ({
       },
       exposes: {
         "./NewsLayout": "./src/App.jsx",
-        "./PubSub": "./src/events/globalEvents.jsx",
       },
       shared: {
         ...deps,
