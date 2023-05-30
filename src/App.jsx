@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import Newscard from "./components/Newscard/Newscard";
 import NewsContentHeader from "./components/NewsContentHeader/NewsContentHeader";
-import WindowEventService from "news_app/PubSub";
+import WindowEventService from "./events/globalEvents";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Box from "@mui/material/Box";
 import socketIOClient from "socket.io-client";
@@ -22,7 +22,7 @@ const App = () => {
   const theme = useTheme();
 
   const filterHandler = (event) => {
-    setFilter(event);
+    setFilter(event.detail);
     setLoader(true);
   };
 
@@ -42,7 +42,7 @@ const App = () => {
 
   const fetchMoreData = async () => {
     setPage(page + 1);
-    fetch(`https://3621-45-121-2-206.ngrok-free.app/api/v1/news-feed`, {
+    fetch(`https://f81e-45-121-2-247.ngrok-free.app/api/v1/news-feed`, {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -71,7 +71,7 @@ const App = () => {
     setLoader(true);
 
     //fetch news by default or by preference
-    fetch(`https://3621-45-121-2-206.ngrok-free.app/api/v1/news-feed`, {
+    fetch(`https://f81e-45-121-2-247.ngrok-free.app/api/v1/news-feed`, {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -94,12 +94,12 @@ const App = () => {
 
   useEffect(() => {
     const socket = socketIOClient("https://3621-45-121-2-206.ngrok-free.app");
-    // addNotification({
-    //   title: "News Update",
-    //   subtitle: "News Info",
-    //   message: "This is a very long message",
-    //   native: true,
-    // });
+    addNotification({
+      title: "News Update",
+      subtitle: "News Info",
+      message: "This is a very long message",
+      native: true,
+    });
 
     socket.on("news_updated", (data) => console.log(data));
 
@@ -152,9 +152,9 @@ const App = () => {
               <CircularProgress />
             </div>
           )}
-          {newsData?.map((item) => (
+          {newsData?.map((item, index) => (
             <Newscard
-              key={item._id}
+              key={index}
               showCategory={filter.length > 1 ? true : false}
               imageUrl={item.image ? item.image : imageMapping["none"]}
               title={item.title}
