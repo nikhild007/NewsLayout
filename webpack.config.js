@@ -44,7 +44,7 @@ module.exports = (_, argv) => ({
       name: "news_layout",
       filename: "remoteEntry.js",
       remotes: {
-        news_layout: "news_layout@http://localhost:8081/remoteEntry.js",
+        news_app: "news_app@http://localhost:3000/remoteEntry.js",
       },
       exposes: {
         "./NewsLayout": "./src/App.jsx",

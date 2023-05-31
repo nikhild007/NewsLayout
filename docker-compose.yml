@@ -1,0 +1,16 @@
+version: '3.8'
+
+networks:
+  newsforyou:
+
+services:
+  news-app:
+    container_name: news-layout-container
+    image: news-layout:0.1
+    restart: on-failure
+    build:
+      context: ./
+    ports:
+      - 8081:8081
+    networks:
+      - newsforyou

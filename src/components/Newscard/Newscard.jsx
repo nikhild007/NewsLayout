@@ -24,8 +24,9 @@ function Newscard({
     <>
       <a
         href={url}
+        target="_blank"
         className={styles.linkElement}
-        onClick={newsClickHandler(news_id)}
+        onClick={() => newsClickHandler(news_id)}
       >
         <div className={styles.newsCard}>
           <AgencyDetails agencyImage={agencyImage} newsUrl={url} />

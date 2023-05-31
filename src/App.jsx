@@ -42,7 +42,7 @@ const App = () => {
 
   const fetchMoreData = async () => {
     setPage(page + 1);
-    fetch(`https://bee8-45-121-2-247.ngrok-free.app/api/v1/news-feed`, {
+    fetch(`http://localhost:8082/api/v1/news-feed`, {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -71,7 +71,7 @@ const App = () => {
     setLoader(true);
 
     //fetch news by default or by preference
-    fetch(`https://bee8-45-121-2-247.ngrok-free.app/api/v1/news-feed`, {
+    fetch(`http://localhost:8082/api/v1/news-feed`, {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -93,7 +93,7 @@ const App = () => {
   }, [filter]);
 
   useEffect(() => {
-    const socket = socketIOClient("https://3621-45-121-2-206.ngrok-free.app");
+    const socket = socketIOClient("http://localhost:8082");
 
     socket.on("news_updated", (data) => {
       addNotification({
