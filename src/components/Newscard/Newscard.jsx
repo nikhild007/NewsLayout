@@ -30,7 +30,7 @@ function Newscard({
         <div className={styles.newsCard}>
           <AgencyDetails agencyImage={agencyImage} newsUrl={url} />
           <div className={styles.newsCardContent}>
-            <div>
+            <div className={styles.newsSubCard}>
               <Typography
                 className={styles.newsHeading}
                 variant="p"
@@ -40,8 +40,13 @@ function Newscard({
               </Typography>
               <div className={styles.dateAndCategory}>
                 <PublishDateFormatter publishDate={publishDate} />
-                {showCategory && <Chip label={category} />}
               </div>
+
+              {showCategory && (
+                <div className={styles.chip}>
+                  <Chip label={category} />
+                </div>
+              )}
             </div>
             <Newsimage imageUrl={imageUrl} />
           </div>

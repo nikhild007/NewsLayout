@@ -93,15 +93,16 @@ const App = () => {
   }, [filter]);
 
   useEffect(() => {
-    // const socket = socketIOClient("https://3621-45-121-2-206.ngrok-free.app");
-    addNotification({
-      title: "News Update",
-      subtitle: "News Info",
-      message: "This is a very long message",
-      native: true,
-    });
+    const socket = socketIOClient("https://3621-45-121-2-206.ngrok-free.app");
 
-    // socket.on("news_updated", (data) => console.log(data));
+    socket.on("news_updated", (data) => {
+      addNotification({
+        title: "News Update",
+        subtitle: "News Info",
+        message: "This is a very long message",
+        native: true,
+      });
+    });
 
     WindowEventService.subscribe("agency-category-filter", filterHandler);
     WindowEventService.subscribe("updateFeed", updateFeedHandler);
@@ -119,7 +120,7 @@ const App = () => {
       <Notifications />
       <Box
         sx={{
-          width: "60%",
+          maxWidth: "60%",
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
@@ -155,7 +156,7 @@ const App = () => {
           {newsData?.map((item, index) => (
             <Newscard
               key={index}
-              showCategory={true}
+              showCategory={filter.length > 1}
               imageUrl={item.image ? item.image : imageMapping["none"]}
               title={item.title}
               publishDate={item.publishedAt}
