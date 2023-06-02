@@ -157,14 +157,14 @@ const App = () => {
             <Newscard
               key={index}
               showCategory={filter.length > 1}
-              imageUrl={item.image ? item.image : imageMapping["none"]}
+              imageUrl={item?.image ? item?.image : imageMapping["none"]}
               title={item.title}
-              publishDate={item.publishedAt}
-              url={item.url}
+              publishDate={item?.publishedAt}
+              url={item?.url}
               agencyImage={item?.agencyId?.logo}
-              category={item.categoryId.title}
-              news_id={item._id}
-              clickCount={item.clickCount}
+              category={item?.categoryId?.title}
+              news_id={item?._id}
+              clickCount={item?.clickCount}
             />
           ))}
         </InfiniteScroll>
