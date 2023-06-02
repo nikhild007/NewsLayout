@@ -16,9 +16,24 @@ function Newscard({
   category,
   news_id,
 }) {
-  const newsClickHandler = (news_id) => {
-    WindowEventService.fire("clickedNews", { news_id });
+  const newsClickHandler = async (news_id) => {
+    await increaseNewsReadCount(news_id);
   };
+
+  async function increaseNewsReadCount(news_id) {
+    try {
+      const requestOptions = {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ _id: news_id }),
+      };
+      const apiUrl = "http://report-service.localhost/updateClickCount";
+      const response = await fetch(apiUrl, requestOptions);
+      await response.json();
+    } catch (error) {
+      console.log("OOPS!, error", error);
+    }
+  }
 
   return (
     <>

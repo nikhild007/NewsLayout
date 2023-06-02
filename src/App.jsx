@@ -42,7 +42,7 @@ const App = () => {
 
   const fetchMoreData = async () => {
     setPage(page + 1);
-    fetch(`http://localhost:8082/api/v1/news-feed`, {
+    fetch(`http://news-delivery.localhost/api/v1/news-feed`, {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -66,12 +66,12 @@ const App = () => {
   };
 
   useEffect(() => {
-    // make page start to 1
     setPage(1);
     setLoader(true);
 
     //fetch news by default or by preference
-    fetch(`http://localhost:8082/api/v1/news-feed`, {
+    fetch(`http://news-delivery.localhost/api/v1/news-feed`, {
+    // fetch(`http://localhost:8082/api/v1/news-feed`, {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -93,7 +93,7 @@ const App = () => {
   }, [filter]);
 
   useEffect(() => {
-    const socket = socketIOClient("http://localhost:8082");
+    const socket = socketIOClient("http://news-delivery.localhost");
 
     socket.on("news_updated", (data) => {
       addNotification({
